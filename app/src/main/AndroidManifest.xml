@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChooserApp">
-        <activity android:name=".NewPersonActivity"></activity>
+        <activity android:name=".ChosenPersonActivity"
+            android:theme="@style/AppTheme.AppDialogTheme"></activity>
+        <activity android:name=".ChooserActivity" />
+        <activity
+            android:name=".NewPersonActivity"
+            android:theme="@style/AppTheme.AppDialogTheme" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

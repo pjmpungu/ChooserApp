@@ -1,5 +1,6 @@
 package com.jonathannalikka.chooserapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +16,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements PersonAdapter.ItemClicked {
 
+    //result code for when adding a new person
+
+    public static final int add_person = 0204;
+
     //instance variables for ui components
-    Button btnAdd;
+    Button btnAdd, btnChoose;
     TextView tvTitle;
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdapter;
@@ -31,21 +36,16 @@ public class MainActivity extends AppCompatActivity implements PersonAdapter.Ite
         //initialize ui instance variables
 
         btnAdd = findViewById(R.id.btnAdd);
-        tvTitle = findViewById(R.id.tvTitle);
+        btnChoose = findViewById(R.id.btnChoose);
         recyclerView = findViewById(R.id.list);
 
         layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(layoutManager);
 
-        //initialize array list which stores people
-
-        people = new ArrayList<Person>();
-        people.add(new Person());
-
         //intialize array adapter
 
-        myAdapter = new PersonAdapter(MainActivity.this, people);
+        myAdapter = new PersonAdapter(MainActivity.this, ApplicationClass.people);
 
         //set adapter for recylcer view
 
@@ -57,7 +57,18 @@ public class MainActivity extends AppCompatActivity implements PersonAdapter.Ite
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NewPersonActivity.class);
+                startActivityForResult(intent, add_person);
+            }
+        });
+
+        //when ready to choose at random go to new screen
+        btnChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChooserActivity.class);
+                intent.putExtra("index", 0);
                 startActivity(intent);
+
             }
         });
 
@@ -66,7 +77,19 @@ public class MainActivity extends AppCompatActivity implements PersonAdapter.Ite
 
     @Override
     public void onItemClicked(int index) {
-        Toast.makeText(this, "Surname "+ people.get(index).getLname(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Surname "+ ApplicationClass.people.get(index).getLname(), Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //if we are coming back from the add person screen, update our list
+
+        if(requestCode == add_person && resultCode == NewPersonActivity.add_person_result_code){
+
+            myAdapter.notifyDataSetChanged();
+
+        }
+    }
 }
