@@ -37,13 +37,13 @@ public class ChooserActivity extends AppCompatActivity {
 
             if(primary) {
                 wheelItemList.add(new WheelItem(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null),
-                        BitmapFactory.decodeResource(getResources(), R.drawable.coin),
+                        person.getBitmap(),
                         person.getFname() + "  " + person.getLname()));
                 primary = false;
             }else{
 
                 wheelItemList.add(new WheelItem(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null),
-                        BitmapFactory.decodeResource(getResources(), R.drawable.coin),
+                        person.getBitmap(),
                         person.getFname() + "  " + person.getLname()));
                 primary = true;
 
@@ -53,9 +53,7 @@ public class ChooserActivity extends AppCompatActivity {
 
         luckyWheel.addWheelItems(wheelItemList);
         int index = rand.nextInt(ApplicationClass.people.size());
-        luckyWheel.setTarget(index+1);
-        Log.i("index", String.valueOf(index));
-        ApplicationClass.people.get(index).setBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.coin));
+        luckyWheel.setTarget(index+1);1
 
         luckyWheel.setLuckyWheelReachTheTarget(new OnLuckyWheelReachTheTarget() {
             @Override

@@ -100,10 +100,10 @@ public class NewPersonActivity extends AppCompatActivity {
         //if result is ok, get the data returned and set image view to image selected
 
 
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK && requestCode == 0){
             targetUri = data.getData();
             try {
-                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri)), 70, 70, false);
                 ivPerson.setVisibility(View.VISIBLE);
                 ivPerson.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
