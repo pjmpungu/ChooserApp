@@ -1,11 +1,13 @@
 package com.jonathannalikka.chooserapp;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 
@@ -64,11 +67,19 @@ public class NewPersonActivity extends AppCompatActivity {
 
                 String fname = etFname.getText().toString().trim();
                 String lname = etLname.getText().toString().trim();
+                bitmap = BitmapFactory.decodeResource(getResources(),
+                        R.drawable.coin);
 
-                ApplicationClass.people.add(new Person(fname, lname, bitmap));
-                setResult(add_person_result_code);
-                finish();
+                if(fname == null) {
+                    Toast.makeText(NewPersonActivity.this, "Please enter a first name"
+                            , Toast.LENGTH_SHORT).show();
+                }else {
 
+                    ApplicationClass.people.add(new Person(fname, lname, bitmap));
+                    setResult(add_person_result_code);
+                    finish();
+
+                }
             }
         });
 

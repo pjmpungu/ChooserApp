@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements PersonAdapter.Ite
 
     @Override
     public void onItemClicked(int index) {
-        Toast.makeText(this, "Surname "+ ApplicationClass.people.get(index).getLname(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.surname)+ ApplicationClass.people.get(index).getLname(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

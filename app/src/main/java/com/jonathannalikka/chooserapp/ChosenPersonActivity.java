@@ -38,7 +38,7 @@ public class ChosenPersonActivity extends AppCompatActivity {
         String fname = ApplicationClass.people.get(index).getFname();
         String lname = ApplicationClass.people.get(index).getLname();
 
-        tvMessage.setText("Sorry " + fname + " " + lname + "!");
+        tvMessage.setText(getString(R.string.sorry) + fname + " " + lname + "!");
         btnBack = findViewById(R.id.btnBack);
         btnSpin = findViewById(R.id.btnSpinAgain);
 

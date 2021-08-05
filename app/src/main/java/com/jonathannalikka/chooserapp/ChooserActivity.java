@@ -36,13 +36,13 @@ public class ChooserActivity extends AppCompatActivity {
         for(Person person: ApplicationClass.people){
 
             if(primary) {
-                wheelItemList.add(new WheelItem(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null),
+                wheelItemList.add(new WheelItem(ResourcesCompat.getColor(getResources(), R.color.accent, null),
                         person.getBitmap(),
                         person.getFname() + "  " + person.getLname()));
                 primary = false;
             }else{
 
-                wheelItemList.add(new WheelItem(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null),
+                wheelItemList.add(new WheelItem(ResourcesCompat.getColor(getResources(), R.color.primary, null),
                         person.getBitmap(),
                         person.getFname() + "  " + person.getLname()));
                 primary = true;
@@ -53,7 +53,7 @@ public class ChooserActivity extends AppCompatActivity {
 
         luckyWheel.addWheelItems(wheelItemList);
         int index = rand.nextInt(ApplicationClass.people.size());
-        luckyWheel.setTarget(index+1);1
+        luckyWheel.setTarget(index+1);
 
         luckyWheel.setLuckyWheelReachTheTarget(new OnLuckyWheelReachTheTarget() {
             @Override
@@ -65,7 +65,6 @@ public class ChooserActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
 }
